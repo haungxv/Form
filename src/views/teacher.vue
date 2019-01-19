@@ -6,7 +6,7 @@
             <label for="code">请填写下载码：</label>
             <input id="code" v-model="code" type="text" name="code">
             <div id="submit-code" @click="teacherSubmit">提交下载码</div>
-            <div id="down"><a>点击下载</a></div>
+            <div id="down"><a href="http://39.108.84.51:8080/excel/?code=ABCDE">点击下载</a></div>
         </form>
     </div>
 </template>
@@ -24,17 +24,18 @@
             teacherSubmit() {
                 let isSubmit = confirm("是否确认提交下载码？");
                 if (isSubmit) {
-                    axios.get("http://39.108.84.51:8080/excel/", {
-                            params: {
-                                code: this.code
-                            }
-                        }
-                    ).then(function (res) {
-                        console.log("成功！");
-                        console.log(res);
-                    }).catch(function (err) {
-                        console.log(err);
-                    })
+                    alert("请点击下载!")
+                    // axios.get("http://39.108.84.51:8080/excel/", {
+                    //         params: {
+                    //             code: this.code
+                    //         }
+                    //     }
+                    // ).then(function (res) {
+                    //     console.log("成功！");
+                    //     console.log(res.data);
+                    // }).catch(function (err) {
+                    //     console.log(err);
+                    // })
                 }
             },
 

@@ -13,7 +13,7 @@ const config = {
     entry: path.join(__dirname, 'src/index.js'),
     output: {
         filename: 'bundle.js',
-        path: path.join(__dirname, 'form'),
+        path: path.join(__dirname, 'form1'),
         publicPath: '/public/'
     },
     module: {
@@ -40,7 +40,7 @@ const config = {
                     {
                         loader: 'url-loader',
                         options: {
-                            limit: 1024,
+                            // limit: 1024,
                             name: 'images/[name].[ext]'
                         }
                     }
@@ -65,7 +65,11 @@ const config = {
             }
         }),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoEmitOnErrorsPlugin()
+        new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.ProvidePlugin({
+            jQuery: "jquery",
+            $: "jquery"
+        })
     ],
     performance: {
         hints: false
@@ -77,7 +81,7 @@ if (isDev) {
         port: 8000,
         host: '0.0.0.0',
         historyApiFallback: {
-            index: '/public/'
+            index: '/public/index.html'
         }
     };
 } else {

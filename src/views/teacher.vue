@@ -4,7 +4,7 @@
         <div class="title">2019寒假学生返校信息统计表</div>
         <form>
             <label for="code">请填写下载码：</label>
-            <input id="code" type="text" name="code">
+            <input id="code" v-model="code" type="text" name="code">
             <div id="submit-code" @click="teacherSubmit">提交下载码</div>
             <div id="down"><a>点击下载</a></div>
         </form>
@@ -12,17 +12,25 @@
 </template>
 
 <script>
+    import axios from 'axios';
+
     export default {
         data() {
-            return {}
+            return {
+                code: 'ABCDE'
+            }
         },
         methods: {
             teacherSubmit() {
                 let isSubmit = confirm("是否确认提交下载码？");
                 if (isSubmit) {
-                    axios.post("/huangdongxv", {
-                        code: "abcde"
-                    }).then(function (res) {
+                    axios.get("http://39.108.84.51:8080/excel/", {
+                            params: {
+                                code: this.code
+                            }
+                        }
+                    ).then(function (res) {
+                        console.log("成功！");
                         console.log(res);
                     }).catch(function (err) {
                         console.log(err);

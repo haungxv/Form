@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './views/app.vue';
+import $ from 'jquery';
 
 
-// import './images/1.jpg' ;
+// import './images/5.jpg' ;
 // import './styles/test.css';
 import createRouter from '../vue-router/router.js'
 

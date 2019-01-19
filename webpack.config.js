@@ -14,7 +14,7 @@ const config = {
     output: {
         filename: 'bundle.js',
         path: path.join(__dirname, 'form1'),
-        publicPath: '/public/'
+        publicPath: 'http://47.100.48.121/'
     },
     module: {
         rules: [
@@ -32,7 +32,15 @@ const config = {
                 use: ExtractPlugin.extract({
                     use: 'css-loader',
                     fallback: 'style-loader'
-                })
+                }),
+            },
+            {
+                test: /\\\\\\\\.css$/,
+                loader: "style!css"
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                loader: 'file-loader'
             },
             {
                 test: /\.(png|jpg|jpeg|gif|svg)$/,
@@ -81,7 +89,7 @@ if (isDev) {
         port: 8000,
         host: '0.0.0.0',
         historyApiFallback: {
-            index: '/public/index.html'
+            index: 'http://47.100.48.121/index.html'
         }
     };
 } else {

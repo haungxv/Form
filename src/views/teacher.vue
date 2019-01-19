@@ -2,6 +2,8 @@
     <div id="teacher-FORM">
         <div class="white"></div>
         <div class="title">2019寒假学生返校信息统计表</div>
+        <el-button :plain="true" @click="success" id="teacherSucc">成功</el-button>
+        <el-button :plain="true" @click="fail" id="teacherFail">警告</el-button>
         <form>
             <label for="code">请填写下载码：</label>
             <input id="code" v-model="code" type="text" name="code">
@@ -24,7 +26,9 @@
             teacherSubmit() {
                 let isSubmit = confirm("是否确认提交下载码？");
                 if (isSubmit) {
-                    alert("请点击下载!")
+                    $("#teacherSucc").click();
+
+                    // alert("请点击下载!")
                     // axios.get("http://39.108.84.51:8080/excel/", {
                     //         params: {
                     //             code: this.code
@@ -38,23 +42,37 @@
                     // })
                 }
             },
-
+            success() {
+                this.$message({
+                    showClose: true,
+                    message: '上传成功，请点击下载！',
+                    type: 'success'
+                });
+            },
+            fail() {
+                this.$message({
+                    showClose: true,
+                    message: '错了哦，这是一条错误消息',
+                    type: 'error'
+                });
+            },
         }
     }
 </script>
 <style scoped>
+    #teacherSucc, #teacherFail {
+        display: none;
+    }
     #teacher-FORM {
         box-sizing: border-box;
         width: 100%;
         height: 100%;
     }
-
     .white {
         border-top: 1px solid white;
         height: 1px;
 
     }
-
     .title {
         text-align: center;
         font-size: 1.5em;
@@ -84,7 +102,7 @@
         margin-top: 20px;
         width: 150px;
         height: 34px;
-        font-size: 1.2em;
+        font-size: 1.1em;
     }
 
     input:focus {
@@ -110,6 +128,10 @@
         letter-spacing: 0.4px;
         cursor: pointer;
     }
+    #down a{
+        text-decoration:none;
+        color:black;
+    }
 
     @media screen and (max-width: 600px) {
         .title {
@@ -128,17 +150,14 @@
             height: 28px;
             font-size: 1.1em;
         }
-
         input:focus {
             outline-color: rgb(181, 182, 230);
         }
-
         #submit-code {
             width: 160px;
             font-size: 1.15em;
             letter-spacing: 0.4px;
         }
-
         #down {
             font-size: 1.15em;
             letter-spacing: 0.4px;

@@ -2,9 +2,11 @@
     <div id="FORM">
         <div class="white"></div>
         <div class="title">寒假返校信息登记</div>
+        <el-button :plain="true" @click="success" id="studentSucc">成功</el-button>
+        <el-button :plain="true" @click="fail" id="studentFail">警告</el-button>
         <form>
             <label for="institute">学院：</label>
-            <input v-model="institute" type="text" id="institute" name="b" ><br/>
+            <input v-model="institute" type="text" id="institute" name="b"><br/>
             <label for="name">姓名：</label>
             <input v-model="name" type="text" id="name" name="c"><br/>
             <label for="number">学号：</label>
@@ -37,12 +39,12 @@
                 school: '',
                 reason: '',
                 time: '',
-
             }
         },
         methods: {
             studentSubmit() {
-                let isSubmit = confirm("是否确认提交？");
+                $("#studentSucc").click();
+                let isSubmit = confirm("是否确认提交返校信息？");
                 if (isSubmit) {
                     axios.post("http://39.108.84.51:8080/student/", {
                         B: this.number,
@@ -57,14 +59,32 @@
                         console.log("成功");
                         console.log(res);
                     }).catch(function (err) {
-                        console.log("失败"+err);
+                        console.log("失败" + err);
                     })
                 }
-            }
+            },
+            success() {
+                this.$message({
+                    showClose: true,
+                    message: '恭喜您，上传成功！',
+                    type: 'success'
+                });
+            },
+            fail() {
+                this.$message({
+                    showClose: true,
+                    message: '错了哦，这是一条错误消息',
+                    type: 'error'
+                });
+            },
         }
     }
 </script>
 <style scoped>
+    #studentSucc, #studentFail {
+        display: none;
+    }
+
     #FORM {
         box-sizing: border-box;
         width: 100%;
@@ -109,7 +129,7 @@
         height: 34px;
         margin-top: 16px;
         padding-left: 3px;
-        font-size: 1.1em;
+        font-size: 1em;
         letter-spacing: 0.2px;
     }
 

@@ -2,8 +2,8 @@
     <div id="FORM">
         <div class="white"></div>
         <div class="title">寒假返校信息登记</div>
-        <el-button :plain="true" @click="success" id="studentSucc">成功</el-button>
-        <el-button :plain="true" @click="fail" id="studentFail">警告</el-button>
+        <el-button :plain="true" @click="success(SuccMes)" id="studentSucc">成功</el-button>
+        <el-button :plain="true" @click="fail(FailMes)" id="studentFail">警告</el-button>
         <form>
             <label for="institute">学院：</label>
             <input v-model="institute" type="text" id="institute" name="b"><br/>
@@ -39,41 +39,55 @@
                 school: '',
                 reason: '',
                 time: '',
+                SuccMes: '恭喜您，上传成功！',
+                FailMes: '上传错误，请重新上传！'
             }
         },
         methods: {
             studentSubmit() {
-                $("#studentSucc").click();
                 let isSubmit = confirm("是否确认提交返校信息？");
                 if (isSubmit) {
-                    axios.post("http://39.108.84.51:8080/student/", {
-                        B: this.number,
-                        C: this.name,
-                        D: this.institute,
-                        // E: this.IDcard,
-                        // F: this.nation,
-                        // G: this.school,
-                        // H: this.reason,
-                        // I: this.time
-                    }).then(function (res) {
-                        console.log("成功");
-                        console.log(res);
-                    }).catch(function (err) {
-                        console.log("失败" + err);
-                    })
+                    let qs = require('qs');
+                    let instance = axios.create({
+                        headers: {'content-type': 'application/x-www-form-urlencoded'}
+                    });
+                    let data = qs.stringify({
+                        "B": this.number,
+                        "C": this.name,
+                        "D": this.institute,
+                        "E": this.IDcard,
+                        "F": this.nation,
+                        "G": this.school,
+                        "H": this.reason,
+                        "I": this.time
+                    });
+                    instance.post("http://39.108.84.51:8080/student/", data)
+                        .then(function (res) {
+                            if (res.data === 'success') {
+                                $("#studentSucc").click();
+                            }else{
+                                // this.SuccMes=res.data;
+                                $("#studentSucc").click();
+
+                            }
+                        })
+                        .catch(function (err) {
+                            // this.FailMes = err.data;
+                            $("#studentFail").click();
+                        })
                 }
             },
-            success() {
+            success(mes) {
                 this.$message({
                     showClose: true,
-                    message: '恭喜您，上传成功！',
+                    message: mes,
                     type: 'success'
                 });
             },
-            fail() {
+            fail(mes) {
                 this.$message({
                     showClose: true,
-                    message: '错了哦，这是一条错误消息',
+                    message: mes,
                     type: 'error'
                 });
             },

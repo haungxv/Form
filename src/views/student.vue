@@ -5,21 +5,19 @@
         <el-button :plain="true" @click="success(SuccMes)" id="studentSucc">成功</el-button>
         <el-button :plain="true" @click="fail(FailMes)" id="studentFail">警告</el-button>
         <form>
-            <label for="institute">学院：</label>
-            <input v-model="institute" type="text" id="institute" name="b"><br/>
-            <label for="name">姓名：</label>
+            <label for="name">姓名</label>：
             <input v-model="name" type="text" id="name" name="c"><br/>
-            <label for="number">学号：</label>
+            <label for="number">学号</label>：
             <input v-model="number" type="text" id="number" name="d"><br/>
-            <label for="IDcard">身份证号：</label>
-            <input v-model="IDcard" type="text" id="IDcard" name="e"><br/>
-            <label for="nation">民族：</label>
+            <label for="nation">民族</label>：
             <input v-model="nation" type="text" id="nation" name="f"><br/>
-            <label for="school">所在校区：</label>
+            <label for="IDcard">身份证号</label>：
+            <input v-model="IDcard" type="text" id="IDcard" name="e"><br/>
+            <label for="school">所在校区</label>：
             <input v-model="school" type="text" id="school" name="g"><br/>
-            <label for="reason">未返校原因：</label>
+            <label for="reason">未返校原因</label>：
             <input v-model="reason" type="text" id="reason" name="h"><br/>
-            <label for="time">预计返校时间：</label>
+            <label for="time">预计返校时间</label>：
             <input v-model="time" type="text" id="time" name="i">
             <div id="submit-info" @click="studentSubmit">提交</div>
         </form>
@@ -31,7 +29,6 @@
     export default {
         data() {
             return {
-                institute: '',
                 name: '',
                 number: '',
                 IDcard: '',
@@ -47,6 +44,7 @@
             studentSubmit() {
                 let isSubmit = confirm("是否确认提交返校信息？");
                 if (isSubmit) {
+
                     let qs = require('qs');
                     let instance = axios.create({
                         headers: {'content-type': 'application/x-www-form-urlencoded'}
@@ -54,7 +52,6 @@
                     let data = qs.stringify({
                         "B": this.number,
                         "C": this.name,
-                        "D": this.institute,
                         "E": this.IDcard,
                         "F": this.nation,
                         "G": this.school,
@@ -65,7 +62,7 @@
                         .then(function (res) {
                             if (res.data === 'success') {
                                 $("#studentSucc").click();
-                            }else{
+                            } else {
                                 // this.SuccMes=res.data;
                                 $("#studentSucc").click();
 
@@ -100,6 +97,7 @@
     }
 
     #FORM {
+        color: rgb(16, 39, 73);
         box-sizing: border-box;
         width: 100%;
         height: 100%;
@@ -118,7 +116,6 @@
         width: 100%;
         text-align: center;
         margin-top: 40px;
-        font-family: Arial, Verdana, Sans-serif;
     }
 
     #FORM form {
@@ -131,15 +128,30 @@
         cursor: pointer;
         /*border:1px solid black;*/
         display: inline-block;
-        width: 32%;
+        width: 38%;
         margin-top: 16px;
         text-align: right;
         font-size: 1.2em;
         letter-spacing: 0.2px;
     }
 
+    @media screen and (min-width: 600px) {
+        label[for='name'], label[for='number'], label[for='nation'] {
+            letter-spacing: 1em;
+        }
+
+        label[for='IDcard'], label[for='school'] {
+            letter-spacing: .3em;
+        }
+
+        label[for='reason'] {
+            letter-spacing: .07em;
+        }
+    }
+
     input {
-        width: 60%;
+        color: rgb(16, 39, 73);
+        width: 54%;
         height: 34px;
         margin-top: 16px;
         padding-left: 3px;
@@ -152,19 +164,26 @@
     }
 
     #submit-info {
+        background-color: rgb(238, 238, 238);
         margin: 0 auto;
         margin-top: 50px;
         cursor: pointer;
-        width: 100px;
+        width: 150px;
+        height: 35px;
+        line-height: 33px;
         text-align: center;
         font-size: 1.3em;
-        letter-spacing: 2px;
-    }
+        letter-spacing: 1em;
+        padding-left: 1em;
+        border-radius: 7px;
+        border: 1px solid black;
+        box-sizing: border-box;
 
+    }
     @media screen and (max-width: 600px) {
         .title {
             box-sizing: border-box;
-            margin-top: 57px;
+            margin-top: 68px;
             width: 100%;
             padding-left: 30%;
             font-size: 1.2em;
@@ -174,17 +193,16 @@
         #FORM form {
             width: 100%;
             margin: 0 auto;
-            margin-top: 30px;
+            margin-top: 40px;
         }
 
         label {
             cursor: pointer;
-            /*border:1px solid black;*/
             display: inline-block;
             line-height: 30px;
             height: 30px;
             text-align: right;
-            width: 35%;
+            width: 32%;
             float: left;
             margin-top: 7px;
             font-size: 1.1em;
@@ -192,7 +210,7 @@
         }
 
         input {
-            width: 56%;
+            width: 54%;
             height: 30px;
             margin-top: 7px;
             padding-left: 3px;
@@ -206,12 +224,17 @@
 
         #submit-info {
             margin: 0 auto;
-            margin-top: 25px;
-            cursor: pointer;
-            width: 70px;
+            margin-top: 30px;
+            width: 135px;
             text-align: center;
             font-size: 1.25em;
-            letter-spacing: 1px;
+            letter-spacing: 1em;
+            padding-left: 1em;
+            border-radius: 6px;
+            border: 1px solid black;
+            box-sizing: border-box;
+            height:31px;
+            line-height:29px;
         }
     }
 </style>

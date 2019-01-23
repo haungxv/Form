@@ -17,7 +17,6 @@
             }
         },
         mounted() {
-
             const that = this;
             window.onresize = () => {
                 return (() => {
@@ -62,7 +61,7 @@
         top: 0;
         width: 100%;
         height: 100%;
-        z-index: -1
+        z-index: -10;
     }
     #app-box {
         width: 100%;

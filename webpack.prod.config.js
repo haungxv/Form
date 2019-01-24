@@ -12,7 +12,7 @@ const devServer = {
     port: 8001,
     host: '0.0.0.0',
     historyApiFallback: {
-        index: 'http://47.100.48.121/index.html'
+        index: '/public/index.html'
     }
 };
 if (isDev) {
@@ -50,8 +50,11 @@ if (isDev) {
             vendor: ['vue']
         },
         output: {
-            filename: '[name].[chunkhash:8].js'
+            filename: '[name].[chunkhash:8].js',
+            path: path.join(__dirname, 'form1'),
+            publicPath: 'http://47.100.48.121/'
         },
+
         plugins: [
             new webpack.optimize.RuntimeChunkPlugin({
                 name: "vendor"

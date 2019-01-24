@@ -1,5 +1,6 @@
 import Student from '../src/views/student.vue';
 import Teacher from '../src/views/teacher.vue';
+import Add from '../src/views/add.vue';
 import App from '../src/views/app.vue';
 
 export default[
@@ -14,5 +15,9 @@ export default[
     {
         path:'/teacher',
         component:Teacher
+    },
+    {
+        path:'/add',
+        component:Add
     }
 ]

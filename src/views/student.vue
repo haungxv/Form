@@ -5,19 +5,19 @@
         <el-button :plain="true" @click="success(SuccMes)" id="studentSucc">成功</el-button>
         <el-button :plain="true" @click="fail(FailMes)" id="studentFail">警告</el-button>
         <form>
-            <label for="name">姓名</label>：
+            <label for="name">姓名：</label>
             <input v-model="name" type="text" id="name" name="c"><br/>
-            <label for="number">学号</label>：
+            <label for="number">学号：</label>
             <input v-model="number" type="text" id="number" name="d"><br/>
-            <label for="nation">民族</label>：
+            <label for="nation">民族：</label>
             <input v-model="nation" type="text" id="nation" name="f"><br/>
-            <label for="IDcard">身份证号</label>：
+            <label for="IDcard">身份证号：</label>
             <input v-model="IDcard" type="text" id="IDcard" name="e"><br/>
-            <label for="school">所在校区</label>：
+            <label for="school">所在校区：</label>
             <input v-model="school" type="text" id="school" name="g"><br/>
-            <label for="reason">未返校原因</label>：
+            <label for="reason">未返校原因：</label>
             <input v-model="reason" type="text" id="reason" name="h"><br/>
-            <label for="time">预计返校时间</label>：
+            <label for="time">预计返校时间：</label>
             <input v-model="time" type="text" id="time" name="i">
             <div id="submit-info" @click="studentSubmit">提交</div>
         </form>
@@ -132,21 +132,7 @@
         margin-top: 16px;
         text-align: right;
         font-size: 1.2em;
-        letter-spacing: 0.2px;
-    }
-
-    @media screen and (min-width: 600px) {
-        label[for='name'], label[for='number'], label[for='nation'] {
-            letter-spacing: 1em;
-        }
-
-        label[for='IDcard'], label[for='school'] {
-            letter-spacing: .3em;
-        }
-
-        label[for='reason'] {
-            letter-spacing: .07em;
-        }
+        letter-spacing: 0.8px;
     }
 
     input {
@@ -202,7 +188,7 @@
             line-height: 30px;
             height: 30px;
             text-align: right;
-            width: 32%;
+            width: 37%;
             float: left;
             margin-top: 7px;
             font-size: 1.1em;
@@ -210,7 +196,7 @@
         }
 
         input {
-            width: 54%;
+            width: 52%;
             height: 30px;
             margin-top: 7px;
             padding-left: 3px;

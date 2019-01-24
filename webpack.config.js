@@ -11,7 +11,7 @@ const config = {
     output: {
         filename: 'bundle.js',
         path: path.join(__dirname, 'form1'),
-        publicPath: 'http://47.100.48.121/'
+        publicPath: '/public/'
     },
     module: {
         rules: [

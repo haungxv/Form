@@ -25,7 +25,6 @@
 </template>
 <script>
     import axios from 'axios';
-
     export default {
         data() {
             return {
@@ -42,37 +41,41 @@
         },
         methods: {
             studentSubmit() {
-                let isSubmit = confirm("是否确认提交返校信息？");
-                if (isSubmit) {
+                if(this.number===''){
+                    this.FailMes = "学号为必填项！";
+                    $("#studentFail").click();
+                }else{
+                    let isSubmit = confirm("是否确认提交返校信息？");
+                    if (isSubmit) {
 
-                    let qs = require('qs');
-                    let instance = axios.create({
-                        headers: {'content-type': 'application/x-www-form-urlencoded'}
-                    });
-                    let data = qs.stringify({
-                        "B": this.number,
-                        "C": this.name,
-                        "E": this.IDcard,
-                        "F": this.nation,
-                        "G": this.school,
-                        "H": this.reason,
-                        "I": this.time
-                    });
-                    instance.post("http://39.108.84.51:8080/student/", data)
-                        .then(function (res) {
-                            if (res.data === 'success') {
-                                $("#studentSucc").click();
-                            } else {
-                                // this.SuccMes=res.data;
-                                $("#studentSucc").click();
-
-                            }
-                        })
-                        .catch(function (err) {
-                            // this.FailMes = err.data;
-                            $("#studentFail").click();
-                        })
+                        let qs = require('qs');
+                        let instance = axios.create({
+                            headers: {'content-type': 'application/x-www-form-urlencoded'}
+                        });
+                        let data = qs.stringify({
+                            "C": this.name,
+                            "D": this.number,
+                            "E": this.IDcard,
+                            "F": this.nation,
+                            "G": this.school,
+                            "H": this.reason,
+                            "I": this.time
+                        });
+                        instance.post("http://39.108.84.51:8080/student/", data)
+                            .then(function (res) {
+                                if (res.data === 'success') {
+                                    $("#studentSucc").click();
+                                }else{
+                                    $("#studentSucc").click();
+                                }
+                            })
+                            .catch(function (err) {
+                                this.FailMes = err.data||'上传错误，请重新上传！';
+                                $("#studentFail").click();
+                            })
+                    }
                 }
+
             },
             success(mes) {
                 this.$message({
@@ -220,7 +223,7 @@
             border: 1px solid black;
             box-sizing: border-box;
             height:31px;
-            line-height:29px;
+            line-height:30px;
         }
     }
 </style>

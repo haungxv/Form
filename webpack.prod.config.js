@@ -18,62 +18,34 @@ const devServer = {
 if (isDev) {
     config = merge(baseConfig, {
         devServer,
-        plugins:[
+        plugins: [
             new ExtractPlugin("style/[name].css"),
-            new VueloaderPlugin(),
-            new webpack.ProvidePlugin({
-                jQuery: "jquery",
-                $: "jquery"
-            }),
-            new HTMLPlugin({
-                template: path.join(__dirname, 'template.html')
-            }),// html页面
-            new webpack.DefinePlugin({
-                'process.env': {
-                    NODE_ENV: isDev ? '"development"' : '"production"'
-                }
-            }),
+
         ],
-        optimization: {
-        splitChunks: {
-            chunks: 'all'
-        }
-    },
-        performance: {
-        hints: false
-    }
     });
 } else {
     config = merge(baseConfig, {
         entry: {
             app: path.join(__dirname, 'src/index.js'),
-            vendor: ['vue']
+            vendor: ['vue', 'vue-router']
         },
         output: {
             filename: '[name].[chunkhash:8].js',
-            path: path.join(__dirname, 'form1'),
+            path: path.join(__dirname, 'form'),
             publicPath: 'http://47.100.48.121/'
         },
-
         plugins: [
             new webpack.optimize.RuntimeChunkPlugin({
                 name: "vendor"
             }),
-            new ExtractPlugin("style/[name].css"),
-            new VueloaderPlugin(),
-            new webpack.ProvidePlugin({
-                jQuery: "jquery",
-                $: "jquery"
-            }),
-            new HTMLPlugin({
-                template: path.join(__dirname, 'template.html')
-            }),// html页面
-            new webpack.DefinePlugin({
-                'process.env': {
-                    NODE_ENV: isDev ? '"development"' : '"production"'
-                }
-            }),
-        ]
+            new ExtractPlugin("styles/[name].css"),
+        ],
+        optimization: {
+            splitChunks: {
+                chunks: 'all'
+            },
+            // runtimeChunk:true
+        },
     });
 }
 

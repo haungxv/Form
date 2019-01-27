@@ -1,6 +1,9 @@
 const path = require('path');
 const ExtractPlugin = require('extract-text-webpack-plugin');
 const VueloaderPlugin = require('vue-loader/lib/plugin');
+const HTMLPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -10,7 +13,7 @@ const config = {
     entry: path.join(__dirname, 'src/index.js'),
     output: {
         filename: 'bundle.js',
-        path: path.join(__dirname, 'form1'),
+        path: path.join(__dirname, 'form'),
         publicPath: '/public/'
     },
     module: {
@@ -53,6 +56,21 @@ const config = {
             }
         ]
     },
+    plugins:[
+        new VueloaderPlugin(),
+        new HTMLPlugin({
+            template: path.join(__dirname, 'template.html')
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: isDev ? '"development"' : '"production"'
+            }
+        }),
+        new webpack.ProvidePlugin({
+            jQuery: "jquery",
+            $: "jquery"
+        }),
+    ]
 };
 
 

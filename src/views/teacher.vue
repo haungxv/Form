@@ -182,7 +182,7 @@
             letter-spacing: 8px;
             padding-left: 8px;
             height: 32px;
-            line-height: 30px;
+            line-height: 31px;
         }
     }
 </style>
